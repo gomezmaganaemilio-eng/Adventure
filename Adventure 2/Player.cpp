@@ -74,6 +74,70 @@ void Player::UpdateValues()
 	SetDamageMax(this->strenght + 8);
 	SetDefence((this->agility * 10) / (this->luck / 4));
 }
+void Player::LoadStats(const std::string& filename)
+{
+	std::fstream inFile(filename);
+	if (!inFile.is_open()) 
+	{
+		std::cerr << "Error: cant open file" << filename
+			<< std::endl;
+		return;
+	}
+	std::string name = "";
+	int l;
+	int hp;
+	int exp;
+	int DMMin;
+	int DMMax;
+	int D;
+	int S;
+	int A;
+	int I;
+	int De;
+	int L;
+	int Maxexp;
+	int SP;
+	
+	inFile >> name >> l
+		>> hp
+		>> exp
+		>> DMMin
+		>> DMMax
+		>> D
+		>> S
+		>> A
+		>> I
+		>> De
+		>> L
+		>> Maxexp
+		>> SP;
+	inFile.close();
+	SetName(name);
+	SetLevel(l);
+	SetHp(hp);
+	SetExp(exp);
+	SetDamageMin(DMMin);
+	SetDamageMax(DMMax);
+	SetDefence(De);
+}
+std::string Player::SafeStats()
+{
+	return this->GetName() + " " + std::to_string(this->GetHp())
+		+ " " + std::to_string(this->GetLevel())
+		+ " " + std::to_string(this->GetHp())
+		+ " " + std::to_string(this->GetExp())
+		+ " " + std::to_string(this->GetDamageMin())
+		+ " " + std::to_string(this->GetDamageMax())
+		+ " " + std::to_string(this->GetDefence())
+		+ " " + std::to_string(this->GetStrenght())
+		+ " " + std::to_string(this->GetAgility())
+		+ " " + std::to_string(this->GetIntelligence())
+		+ " " + std::to_string(this->GetDexterity())
+		+ " " + std::to_string(this->GetLuck())
+		+ " " + std::to_string(this->GetMaxexp())
+		+ " " + std::to_string(this->GetSkillPoints());
+
+}
 Player::~Player()
 {
 }

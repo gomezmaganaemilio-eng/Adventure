@@ -34,7 +34,7 @@ public:
 	void SetDamageMin(int DMin) { damageMin = DMin; }
 	void SetDamageMax(int DMax) { damageMax = DMax; }
 	void SetDefence(int D) { defence = D; }
-
+	void SetName(std::string n) { name = n; }
 	void AddExp(int xp) { exp += xp; }
 
 	void TakeDamage(int d);

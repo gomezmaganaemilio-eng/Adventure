@@ -25,6 +25,8 @@ void Game::mainMenu()
 	std::cout << "3: Travel" << std::endl;
 	std::cout << "4: Skill Up" << std:: endl;
 	std::cout << "5: Level Up" << std:: endl;
+	std::cout << "6: Save player progress" << std::endl;
+	std::cout << "7: Load last play" << std::endl;
 	
 
 	std::cout << "Enter Choice" << std::endl;
@@ -50,6 +52,14 @@ void Game::mainMenu()
 	case 5:
 		Levelup();
 		break;
+	case 6:
+		SavePlayer();
+		
+		break;
+	case 7:
+		LoadPlayer();
+		
+		break;
 	default:
 		std::cout << "Invalid Option" << std::endl;
 		break;
@@ -63,10 +73,25 @@ void Game::Travel()
 
 void Game::SavePlayer()
 {
+	std::string FileName = "savePlayer.txt";
+	std::ofstream outFile(FileName);
+	if (outFile.is_open())
+	{
+		outFile << player.SafeStats() << " ";
+
+	}
+	else
+	{
+		std::cout << "Cant saved" << std::endl;
+	}
+	outFile.close();
+	std::cout << "Saved!" << std::endl;
 }
 
 void Game::LoadPlayer()
 {
+	std::string fileName = "savePlayer.txt";
+	player.LoadStats(fileName);
 }
 
 void Game::NewPlayer()
