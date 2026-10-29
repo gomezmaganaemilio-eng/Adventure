@@ -58,6 +58,7 @@ void Event::EnemyEncounter(Player& p)
 	{
 		if (playerTurn)
 		{
+			std::cout << "------------Your turn-----------" << std::endl;
 			std::cout << "Choose your action" << std::endl;
 			std::cout << "1: Attack" << std::endl;
 			std::cout << "2: Defend" << std::endl;
@@ -83,23 +84,27 @@ void Event::EnemyEncounter(Player& p)
 				{
 					std::cout << "Player hit enemy" << std::endl;
 					baseEnemy->TakeDamage(p.DoDamage());
+					playerTurn = false;
 				}
 				break;
 			case 2:
 				PlayerDefending = true;
+				playerTurn = false;
 
 				break;
 			case 3:
 				p.PrintPlayerStats();
+				playerTurn = true;
 				break;
 			case 4:
 				baseEnemy->StatsEnemy();
+				playerTurn = true;
 				break;
 			default:
 				std::cout << "invalid option" << std::endl;
 				break;
-			}
-			playerTurn = false;
+			};
+			
 
 		}
 		else
@@ -116,8 +121,13 @@ void Event::EnemyEncounter(Player& p)
 			else
 			{
 				// tarea
+				if (p.GetHp() <= 0)
+				{
+					std::cout << "You die  " << std::endl;
+					playerDefeated = true;
+				}
 				
-				if (PlayerDefending)
+				 if (PlayerDefending && !playerDefeated)
 				{
 					if (attackRoll > 75)
 					{

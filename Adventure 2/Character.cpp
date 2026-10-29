@@ -18,6 +18,7 @@ Character::~Character()
 void Character::InitCharacter(std::string N)
 {
 	this->name = N;
+
 }
 
 void Character::PrintStats()
